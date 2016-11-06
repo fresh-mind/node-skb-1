@@ -1,10 +1,38 @@
-/**
- * Babel Starter Kit (https://www.kriasoft.com/babel-starter-kit)
- *
- * Copyright © 2015-2016 Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
+import express from 'express';
+import canonize from './canonize';
 
-export Greeting from './Greeting.js';
+const app = express();
+
+app.get('/', (req, res) => {
+  
+	const username = canonize( req.query.url );
+	res.json({
+		url: req.query.url,
+		username,
+	});
+
+});
+
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
+});
+
+
+/*const arrUrl = [
+	'https://vk.com/igor.suvorov',
+	'https://twitter.com/suvorovigor',
+	'https://telegram.me/skillbranch',
+	'https://Telegram.me/skillbranch',
+	'@skillbranch',
+	'https://vk.com/skillbranch?w=wall-117903599_1076',
+	'http://vk.com/skillbranch/profile',
+	'skillbranch',
+];
+
+arrUrl.forEach( (url) => {
+
+	const username = canonize(url);
+	console.log(username);
+
+});
+*/
